@@ -35,6 +35,7 @@
 @property (nonatomic, assign)   BOOL                isRaisedStateChangedEvent;
 @property (nonatomic, readonly) NSInteger           numberOfFilledCells;
 
+@property (nonatomic, readonly) NSArray         *   gridArray;
 @property (nonatomic, readonly) NSEnumerator    *   enumerator;
 
 @property (nonatomic, readonly) NSString        *   gridString;

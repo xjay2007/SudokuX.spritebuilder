@@ -1,5 +1,6 @@
 #import "MainScene.h"
 #import "Generator.h"
+#import "GameBoard.h"
 
 #define SUDOKU_TABLE_LENGTH            9
 #define SUDOKU_BLOCK_LENGTH            3
@@ -45,6 +46,10 @@
 }
 @end
 
+@interface MainScene ()
+@property (nonatomic, strong) PuzzleState       *   state;
+@end
+
 @implementation MainScene
 
 
@@ -54,66 +59,20 @@
 
 - (void)didLoadFromCCB {
     [self generateSudoku2];
-//    NSMutableArray *a = [NSMutableArray arrayWithObjects:[AObj objWithX:0 y:0], [AObj objWithX:1 y:1], [AObj objWithX:2 y:2], nil];
-//    CCLOG(@"before a = %@", a);
-//    ((AObj *)a[0]).x = 2;
-//    [self doWithArray:a];
-//    CCLOG(@"after a = %@", a);
 }
 
-- (void)doWithArray:(NSMutableArray *)array {
-    ((AObj *)array[0]).x = 1;
-    array[1] = [AObj objWithX:3 y:3];
+- (void)onEnter {
+    [super onEnter];
+    
+    [_gameBoard updateGrid:self.state.gridArray];
 }
 
 - (void)generateSudoku2 {
     COUNTER_START();
     Generator *generator = [Generator generatorWithOptions:[GeneratorOptions createWithDifficulty:PuzzleDifficultyEasy]];
-    PuzzleState *state = [generator generate];
+    self.state = [generator generate];
     COUNTER_END();
-    CCLOG(@"state = %@", state);
-}
-
-
-- (BOOL)isNumUnique:(int)num inTable:(int[SUDOKU_TABLE_LENGTH][SUDOKU_TABLE_LENGTH])table atRow:(int)row col:(int)col {
-    NSAssert(row >= 0 && row < SUDOKU_TABLE_LENGTH && col >= 0 && col < SUDOKU_TABLE_LENGTH, @"Out of boundary");
-    BOOL ret = YES;
-    // in row
-    for (int i = 0; i < SUDOKU_TABLE_LENGTH; ++i) {
-        if (num == table[row][i]) {
-            ret = NO;
-            break;
-        }
-    }
-    if (!ret) {
-        return ret;
-    }
-    
-    // in col
-    for (int i = 0; i < SUDOKU_TABLE_LENGTH; ++i) {
-        if (num == table[i][col]) {
-            ret = NO;
-            break;
-        }
-    }
-    if (!ret) {
-        return ret;
-    }
-    // in block
-    int blockRow = row / SUDOKU_BLOCK_LENGTH;
-    int blockCol = col / SUDOKU_BLOCK_LENGTH;
-    for (int i = 0; i < SUDOKU_BLOCK_LENGTH; ++i) {
-        for (int j = 0; j < SUDOKU_BLOCK_LENGTH; ++j) {
-            if (num == table[blockRow * SUDOKU_BLOCK_LENGTH + i][blockCol * SUDOKU_BLOCK_LENGTH + j]) {
-                ret = NO;
-                break;
-            }
-        }
-    }
-    if (!ret) {
-        return ret;
-    }
-    return ret;
+    CCLOG(@"state = %@", self.state);
 }
 
 - (void)generateSudoku {

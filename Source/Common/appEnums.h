@@ -23,4 +23,18 @@ typedef enum : NSUInteger {
     PuzzleDifficultyInvalid
 } PuzzleDifficulty;
 
+typedef enum : NSUInteger {
+    ControlButtonFunctionUnvalid = -1,
+    ControlButtonFunctionDigitIndexMax = 9,
+    // image
+    ControlButtonFunctionPen,
+    ControlButtonFunctionNote,
+    ControlButtonFunctionEraser,
+    ControlButtonFunctionUndo,
+    ControlButtonFunctionExit,
+    ControlButtonFunctionHelp,
+    // max
+    ControlButtonFunctionMax,
+} ControlButtonFunction;
+
 #endif

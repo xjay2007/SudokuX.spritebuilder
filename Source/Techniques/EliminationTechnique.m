@@ -12,7 +12,7 @@
 
 static NSMutableArray   *   _allAvailableTechniques = nil; // Base type used for eliminating possible numbers from cells in a puzzle state.
 
-static const NSString *subclassnames[] = {
+static NSString * const subclassnames[] = {
     @"BeginnerTechnique",
     @"NakedSingleTechnique",
 //    @"BlockAndColumnRowInteractionTechnique",
@@ -30,7 +30,7 @@ static const NSString *subclassnames[] = {
     NSArray *availableTechniques = [EliminationTechnique availableTechniques];
     NSInteger size = sizeof(subclassnames) / sizeof(*subclassnames);
     for (NSInteger i = 0; i < size; ++i) {
-        if ([className isEqualToString:[subclassnames[i] copy]]) {
+        if ([className isEqualToString:subclassnames[i]]) {
             return availableTechniques[i];
         }
     }
@@ -43,7 +43,7 @@ static const NSString *subclassnames[] = {
             _allAvailableTechniques = [NSMutableArray arrayWithCapacity:0];
             NSInteger size = sizeof(subclassnames) / sizeof(*subclassnames);
             for (NSInteger i = 0; i < size; ++i) {
-                Class subClass = NSClassFromString([subclassnames[i] copy]);
+                Class subClass = NSClassFromString(subclassnames[i]);
                 [_allAvailableTechniques addObject:[[subClass alloc] init]];
             }
         }

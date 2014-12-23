@@ -12,9 +12,7 @@
 		5B12102A197484DD004C1E1D /* SudokuXActivity.java in Sources */ = {isa = PBXBuildFile; fileRef = 5B12101B19748413004C1E1D /* SudokuXActivity.java */; };
 		5B121030197484FA004C1E1D /* SudokuXActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* SudokuXActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
-		7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainScene.m */; };
 		7A40360419DDEE84007B6E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40360319DDEE84007B6E8F /* main.m */; };
-		7A4036E819DE3F33007B6E8F /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainScene.m */; };
 		7A4036EB19DE3F8E007B6E8F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
 		7A4036EC19DE3F90007B6E8F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3117B978D7009739AE /* QuartzCore.framework */; };
 		7A4036EE19DE3F93007B6E8F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3517B978D7009739AE /* OpenAL.framework */; };
@@ -47,7 +45,6 @@
 		7A97911719E631C6001FFC4D /* libcocos2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A97910419E62E40001FFC4D /* libcocos2d-mac.a */; };
 		7A97911819E631CD001FFC4D /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9790FE19E62E40001FFC4D /* libcocos2d.a */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
-		927F619E196C771E000F43EF /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainScene.m */; };
 		927F61A5196C771E000F43EF /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3517B978D7009739AE /* OpenAL.framework */; };
 		927F61A9196C771E000F43EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3D17B978D7009739AE /* Foundation.framework */; };
 		927F61AA196C771E000F43EF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3F17B978D7009739AE /* CoreGraphics.framework */; };
@@ -152,6 +149,18 @@
 		B7B5D5561A300BD3002D52DA /* SolverOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B5D5541A300BD3002D52DA /* SolverOptions.m */; };
 		B7B5D5571A300BD3002D52DA /* SolverOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B5D5541A300BD3002D52DA /* SolverOptions.m */; };
 		B7B5D5581A300BD3002D52DA /* SolverOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B5D5541A300BD3002D52DA /* SolverOptions.m */; };
+		B7BDB9FC1A3E78360026D44D /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDB9FB1A3E78360026D44D /* MainScene.m */; };
+		B7BDB9FD1A3E78360026D44D /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDB9FB1A3E78360026D44D /* MainScene.m */; };
+		B7BDB9FE1A3E78360026D44D /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDB9FB1A3E78360026D44D /* MainScene.m */; };
+		B7BDBA011A3E78660026D44D /* GameBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDBA001A3E78660026D44D /* GameBoard.m */; };
+		B7BDBA021A3E78660026D44D /* GameBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDBA001A3E78660026D44D /* GameBoard.m */; };
+		B7BDBA031A3E78660026D44D /* GameBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDBA001A3E78660026D44D /* GameBoard.m */; };
+		B7C15FCE1A47B92800EBB6D8 /* ControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C15FCD1A47B92800EBB6D8 /* ControlButton.m */; };
+		B7C15FCF1A47B92800EBB6D8 /* ControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C15FCD1A47B92800EBB6D8 /* ControlButton.m */; };
+		B7C15FD01A47B92800EBB6D8 /* ControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C15FCD1A47B92800EBB6D8 /* ControlButton.m */; };
+		B7C15FD41A47C0B800EBB6D8 /* ControlBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C15FD31A47C0B800EBB6D8 /* ControlBoard.m */; };
+		B7C15FD51A47C0B800EBB6D8 /* ControlBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C15FD31A47C0B800EBB6D8 /* ControlBoard.m */; };
+		B7C15FD61A47C0B800EBB6D8 /* ControlBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C15FD31A47C0B800EBB6D8 /* ControlBoard.m */; };
 		B7C6B95D1A318A300036343F /* Solver.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C6B95C1A318A300036343F /* Solver.m */; };
 		B7C6B95E1A318A300036343F /* Solver.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C6B95C1A318A300036343F /* Solver.m */; };
 		B7C6B95F1A318A310036343F /* Solver.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C6B95C1A318A300036343F /* Solver.m */; };
@@ -278,8 +287,6 @@
 		B737896E180762440076A88C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Source/Resources/Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		B73789851807631A0076A88C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/Platforms/iOS/main.m; sourceTree = SOURCE_ROOT; };
 		B73789861807631A0076A88C /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = Source/Prefix.pch; sourceTree = SOURCE_ROOT; };
-		B7378992180767190076A88C /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = Source/MainScene.h; sourceTree = "<group>"; };
-		B7378993180767190076A88C /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainScene.m; path = Source/MainScene.m; sourceTree = "<group>"; };
 		B77F1B2E17B978D7009739AE /* SudokuX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudokuX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77F1B3117B978D7009739AE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B77F1B3317B978D7009739AE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -323,6 +330,14 @@
 		B7B5D54D1A3000CE002D52DA /* FastBitArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastBitArray.m; sourceTree = "<group>"; };
 		B7B5D5531A300BD3002D52DA /* SolverOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolverOptions.h; sourceTree = "<group>"; };
 		B7B5D5541A300BD3002D52DA /* SolverOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SolverOptions.m; sourceTree = "<group>"; };
+		B7BDB9FA1A3E78360026D44D /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
+		B7BDB9FB1A3E78360026D44D /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScene.m; sourceTree = "<group>"; };
+		B7BDB9FF1A3E78660026D44D /* GameBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoard.h; sourceTree = "<group>"; };
+		B7BDBA001A3E78660026D44D /* GameBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBoard.m; sourceTree = "<group>"; };
+		B7C15FCC1A47B92800EBB6D8 /* ControlButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlButton.h; sourceTree = "<group>"; };
+		B7C15FCD1A47B92800EBB6D8 /* ControlButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlButton.m; sourceTree = "<group>"; };
+		B7C15FD21A47C0B800EBB6D8 /* ControlBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlBoard.h; sourceTree = "<group>"; };
+		B7C15FD31A47C0B800EBB6D8 /* ControlBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlBoard.m; sourceTree = "<group>"; };
 		B7C6B95B1A318A300036343F /* Solver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Solver.h; sourceTree = "<group>"; };
 		B7C6B95C1A318A300036343F /* Solver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Solver.m; sourceTree = "<group>"; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MetalShaders; path = Source/MetalShaders; sourceTree = "<group>"; };
@@ -554,6 +569,7 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B7BDB9F91A3E78360026D44D /* Views */,
 				B7B469001A3A8BC8006FF375 /* Common */,
 				B7B469041A3A8BC9006FF375 /* Generator */,
 				B7B469091A3A8BC9006FF375 /* Techniques */,
@@ -561,8 +577,6 @@
 				B7B5D5521A300BAB002D52DA /* Solver */,
 				B7B5D54A1A3000A4002D52DA /* Collections */,
 				7A40362019DDEF0D007B6E8F /* Platforms */,
-				B7378992180767190076A88C /* MainScene.h */,
-				B7378993180767190076A88C /* MainScene.m */,
 				D352B48019EC608A00829775 /* MetalShaders */,
 			);
 			name = Source;
@@ -738,6 +752,22 @@
 			);
 			name = Puzzle;
 			path = Source/Puzzle;
+			sourceTree = "<group>";
+		};
+		B7BDB9F91A3E78360026D44D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B7BDB9FA1A3E78360026D44D /* MainScene.h */,
+				B7BDB9FB1A3E78360026D44D /* MainScene.m */,
+				B7BDB9FF1A3E78660026D44D /* GameBoard.h */,
+				B7BDBA001A3E78660026D44D /* GameBoard.m */,
+				B7C15FCC1A47B92800EBB6D8 /* ControlButton.h */,
+				B7C15FCD1A47B92800EBB6D8 /* ControlButton.m */,
+				B7C15FD21A47C0B800EBB6D8 /* ControlBoard.h */,
+				B7C15FD31A47C0B800EBB6D8 /* ControlBoard.m */,
+			);
+			name = Views;
+			path = Source/Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1056,11 +1086,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7C15FD61A47C0B800EBB6D8 /* ControlBoard.m in Sources */,
 				B7B469251A3A8BC9006FF375 /* GeneratorOptions.m in Sources */,
 				B7B5D5581A300BD3002D52DA /* SolverOptions.m in Sources */,
 				B7B469291A3A8BC9006FF375 /* BeginnerTechnique.m in Sources */,
 				B7B4BD441A3044DB00D1FEE6 /* PuzzleState.m in Sources */,
-				7A4036E819DE3F33007B6E8F /* MainScene.m in Sources */,
 				B7B4692D1A3A8BC9006FF375 /* BlockAndColumnRowInteractionTechnique.m in Sources */,
 				B7B469411A3A8BC9006FF375 /* NakedSubsetTechnique.m in Sources */,
 				B7B469211A3A8BC9006FF375 /* Generator.m in Sources */,
@@ -1069,11 +1099,14 @@
 				7A40360419DDEE84007B6E8F /* main.m in Sources */,
 				7A59498E19E3941300F65F90 /* AppDelegate.m in Sources */,
 				B7B469391A3A8BC9006FF375 /* HiddenSubsetTechnique.m in Sources */,
+				B7BDBA031A3E78660026D44D /* GameBoard.m in Sources */,
+				B7C15FD01A47B92800EBB6D8 /* ControlButton.m in Sources */,
 				B7B4691D1A3A8BC9006FF375 /* Position.m in Sources */,
 				B7B469351A3A8BC9006FF375 /* HiddenSingleTechnique.m in Sources */,
 				B7B4693D1A3A8BC9006FF375 /* NakedSingleTechnique.m in Sources */,
 				B7C6B9601A318A310036343F /* Solver.m in Sources */,
 				B7B469311A3A8BC9006FF375 /* EliminationTechnique.m in Sources */,
+				B7BDB9FE1A3E78360026D44D /* MainScene.m in Sources */,
 				B7B4BD3D1A303FDD00D1FEE6 /* SolverResults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1082,15 +1115,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				927F619E196C771E000F43EF /* MainScene.m in Sources */,
 				B7B4BD3B1A303FDD00D1FEE6 /* SolverResults.m in Sources */,
 				B7B469331A3A8BC9006FF375 /* HiddenSingleTechnique.m in Sources */,
+				B7C15FD51A47C0B800EBB6D8 /* ControlBoard.m in Sources */,
+				B7BDBA021A3E78660026D44D /* GameBoard.m in Sources */,
 				B7B469271A3A8BC9006FF375 /* BeginnerTechnique.m in Sources */,
 				B7B4691B1A3A8BC9006FF375 /* Position.m in Sources */,
 				B7B4692F1A3A8BC9006FF375 /* EliminationTechnique.m in Sources */,
+				B7BDB9FD1A3E78360026D44D /* MainScene.m in Sources */,
 				B7B469431A3A8BC9006FF375 /* XwingTechnique.m in Sources */,
 				B7B5D5561A300BD3002D52DA /* SolverOptions.m in Sources */,
 				B7B4BD421A3044DB00D1FEE6 /* PuzzleState.m in Sources */,
+				B7C15FCF1A47B92800EBB6D8 /* ControlButton.m in Sources */,
 				B7B5D54F1A3000CE002D52DA /* FastBitArray.m in Sources */,
 				B7B4693F1A3A8BC9006FF375 /* NakedSubsetTechnique.m in Sources */,
 				B7B469231A3A8BC9006FF375 /* GeneratorOptions.m in Sources */,
@@ -1107,6 +1143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7C15FD41A47C0B800EBB6D8 /* ControlBoard.m in Sources */,
 				B7B469221A3A8BC9006FF375 /* GeneratorOptions.m in Sources */,
 				B7B5D5551A300BD3002D52DA /* SolverOptions.m in Sources */,
 				B7B469261A3A8BC9006FF375 /* BeginnerTechnique.m in Sources */,
@@ -1117,14 +1154,16 @@
 				B7B4691E1A3A8BC9006FF375 /* Generator.m in Sources */,
 				B7B5D54E1A3000CE002D52DA /* FastBitArray.m in Sources */,
 				B7B469421A3A8BC9006FF375 /* XwingTechnique.m in Sources */,
-				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				B7B469361A3A8BC9006FF375 /* HiddenSubsetTechnique.m in Sources */,
+				B7BDBA011A3E78660026D44D /* GameBoard.m in Sources */,
+				B7C15FCE1A47B92800EBB6D8 /* ControlButton.m in Sources */,
 				B7B4691A1A3A8BC9006FF375 /* Position.m in Sources */,
 				B7B469321A3A8BC9006FF375 /* HiddenSingleTechnique.m in Sources */,
 				B7B4693A1A3A8BC9006FF375 /* NakedSingleTechnique.m in Sources */,
 				B7C6B95D1A318A300036343F /* Solver.m in Sources */,
 				B7B4692E1A3A8BC9006FF375 /* EliminationTechnique.m in Sources */,
+				B7BDB9FC1A3E78360026D44D /* MainScene.m in Sources */,
 				B7B4BD3A1A303FDD00D1FEE6 /* SolverResults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -30,6 +30,7 @@ static NSMutableArray *InstantiatePossibleNumbersArray(PuzzleState *state);
 @end
 
 @implementation PuzzleState
+
 + (instancetype)state {
     return [[[self class] alloc] init];
 }
@@ -137,6 +138,10 @@ static NSMutableArray *InstantiatePossibleNumbersArray(PuzzleState *state);
         self.filledCells = @(count);
     }
     return [self.filledCells integerValue];
+}
+
+- (NSArray *)gridArray {
+    return self.grid;
 }
 
 - (NSEnumerator *)enumerator {
