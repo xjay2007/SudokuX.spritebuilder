@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SolverOptions.h"
+#import "SolverResults.h"
 @class PuzzleState, SolverResults, SolverOptions;
 
 // Analyzes and solves Sudoku puzzles.

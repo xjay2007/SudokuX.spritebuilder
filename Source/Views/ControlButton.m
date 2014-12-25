@@ -36,7 +36,7 @@
     [_label setString:[NSString stringWithFormat:@"%lu", self.functionType + 1]];
     NSString *imageName = [self imageNameWithFunctionType:self.functionType];
     if (imageName) {
-        _image.spriteFrame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:imageName];
+        _image.normalMapSpriteFrame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:imageName];
     }
 }
 

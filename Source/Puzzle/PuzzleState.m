@@ -113,7 +113,7 @@ static NSMutableArray *InstantiatePossibleNumbersArray(PuzzleState *state);
 }
 
 - (void)onStateChanged {
-    if (self.isRaisedStateChangedEvent) {
+    if (self.isRaiseStateChangedEvent) {
         [_delegate puzzleState:self stateChanged:nil];
     }
 }

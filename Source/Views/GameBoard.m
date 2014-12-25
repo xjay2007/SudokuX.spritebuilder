@@ -20,33 +20,100 @@ static const CGFloat    BOX_GAP_HEIGHT = 6.5;
 static const CGFloat    BOX_WIDTH = CELL_WIDTH * BOX_SIZE + CELL_GAP_WIDTH * (BOX_SIZE - 1) + BOX_GAP_WIDTH;
 static const CGFloat    BOX_HEIGHT = CELL_HEIGHT * BOX_SIZE + CELL_GAP_HEIGHT * (BOX_SIZE - 1) + BOX_GAP_HEIGHT;
 
-static NSString   *const FONT_NAME = @"Helvetica-Bold";
+static NSString *const  FONT_NAME = @"Helvetica-Bold";
 static const CGFloat    FONT_SIZE = 20;
 
 @implementation GameBoard
 
 - (void)didLoadFromCCB {
     self.userInteractionEnabled = YES;
+    for (NSInteger row = 0; row < CELL_ROW_MAX; ++row) {
+        for (NSInteger col = 0; col < CELL_COL_MAX; ++col) {
+            CGPoint position = [self positionWithRow:row col:col];
+            NSString *name = [self childNameWithRow:row col:col];
+            CCLabelTTF *labelPen = [CCLabelTTF labelWithString:@"" fontName:FONT_NAME fontSize:FONT_SIZE];
+            labelPen.position = position;
+            labelPen.name = name;
+            [_numberGrid addChild:labelPen];
+            
+            CCNode *nodeNote = [CCNode node];
+            nodeNote.position = position;
+            nodeNote.contentSize = CGSizeMake(CELL_WIDTH, CELL_HEIGHT);
+            nodeNote.anchorPoint = ccp(0.5f, 0.5f);
+            nodeNote.name = name;
+            [_noteGrid addChild:nodeNote];
+            
+            // hightlight
+            CCSprite *highlightImage = [CCSprite spriteWithImageNamed:[self cellHighlightedImageNameWithRow:row col:col isHint:NO]];
+            highlightImage.position = position;
+            highlightImage.name = name;
+            highlightImage.visible = NO;
+            [_highlightGrid addChild:highlightImage];
+            
+            
+            CCSprite *hintHighlightImage = [CCSprite spriteWithImageNamed:[self cellHighlightedImageNameWithRow:row col:col isHint:YES]];
+            hintHighlightImage.position = position;
+            hintHighlightImage.name = name;
+            hintHighlightImage.visible = NO;
+            [_hintHighlightGrid addChild:hintHighlightImage];
+        }
+    }
 }
 
-- (void)updateGrid:(NSArray *)grid {
-    [grid enumerateObjectsUsingBlock:^(NSArray *arr, NSUInteger row, BOOL *stop) {
-        [arr enumerateObjectsUsingBlock:^(id obj, NSUInteger col, BOOL *stop) {
-            if ([obj isKindOfClass:[NSNumber class]]) {
-                CCLabelTTF *label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", [obj unsignedCharValue] + 1] fontName:FONT_NAME fontSize:FONT_SIZE];
-                label.color = [CCColor blackColor];
-                label.position = [self positionWithRow:row col:col];
-                [_numberGrid addChild:label];
-                label.name = [NSString stringWithFormat:@"%lu, %lu", row, col];
-            }
-        }];
-    }];
+- (void)updateAllGrid {
+    for (NSInteger row = 0; row < CELL_ROW_MAX; ++row) {
+        for (NSInteger col = 0; col < CELL_COL_MAX; ++col) {
+            CCLabelTTF *labelPen = (CCLabelTTF *)[_numberGrid getChildByName:[self childNameWithRow:row col:col] recursively:NO];
+            NSString *string = @"";
+            CCColor *color = [CCColor blackColor];
+            [self.delegate gameBoard:self getLabelString:&string andColor:&color atRow:row col:col];
+            labelPen.string = string;
+            labelPen.color = color;
+        }
+    }
+}
+- (void)updateCellAtRow:(NSInteger)row col:(NSInteger)col {
+    [self updatePenAtRow:row col:col];
+}
+
+- (void)updatePenAtRow:(NSInteger)row col:(NSInteger)col {
+    CCLabelTTF *labelPen = (CCLabelTTF *)[_numberGrid getChildByName:[self childNameWithRow:row col:col] recursively:NO];
+    NSString *string = @"";
+    CCColor *color = [CCColor blackColor];
+    [self.delegate gameBoard:self getLabelString:&string andColor:&color atRow:row col:col];
+    labelPen.string = string;
+    labelPen.color = color;
+}
+
+#pragma mark Highlight
+- (void)resetAllHighlights {
+    for (CCSprite *spr in _highlightGrid.children) {
+        spr.visible = NO;
+    }
+    for (CCSprite *spr in _hintHighlightGrid.children) {
+        spr.visible = NO;
+    }
+}
+- (void)highlightCellAtRow:(NSInteger)row col:(NSInteger)col isHint:(BOOL)isHint {
+    NSString *name = [self childNameWithRow:row col:col];
+    CCNode *node = [(isHint ? _hintHighlightGrid : _highlightGrid) getChildByName:name recursively:NO];
+    node.visible = YES;
+}
+- (void)highlightCellsAtPoints:(NSArray *)array isHint:(BOOL)isHint {
+    for (NSValue *value in array) {
+        CGPoint point = [value CGPointValue];
+        [self highlightCellAtRow:point.x col:point.y isHint:isHint];
+    }
 }
 
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
     CGPoint position = [touch locationInNode:self];
     CGPoint point = [self pointWithPosition:position];
     CCLOG(@"%@, %@", NSStringFromCGPoint(position), NSStringFromCGPoint(point));
+    
+    if ([self.delegate respondsToSelector:@selector(gameBoard:onSelectPoint:)]) {
+        [self.delegate gameBoard:self onSelectPoint:point];
+    }
 }
 
 - (CGPoint)pointWithPosition:(CGPoint)position {
@@ -59,17 +126,17 @@ static const CGFloat    FONT_SIZE = 20;
     NSInteger col = boxCol * BOX_SIZE + colInBox;
     NSInteger row = boxRow * BOX_SIZE + rowInBox;
     row = CELL_ROW_MAX - 1 - row;
-    return ccp(col, row);
+    return ccp(row, col);
 }
 
 - (void)convertPosition:(CGPoint)position toRow:(NSInteger *)row col:(NSInteger *)col {
     CGPoint point = [self pointWithPosition:position];
-    *row = point.y;
-    *col = point.x;
+    *row = point.x;
+    *col = point.y;
 }
 
 - (CGPoint)positionWithPoint:(CGPoint)point {
-    return [self positionWithRow:point.y col:point.x];
+    return [self positionWithRow:point.x col:point.y];
 }
 
 - (CGPoint)positionWithRow:(NSInteger)row col:(NSInteger)col {
@@ -84,21 +151,25 @@ static const CGFloat    FONT_SIZE = 20;
     return position;
 }
 
-- (NSString *)cellHighlightedImageNameWithRow:(NSInteger)row col:(NSInteger)col {
+- (NSString *)cellHighlightedImageNameWithRow:(NSInteger)row col:(NSInteger)col isHint:(BOOL)isHint {
     if (row == 0) {
         if (col == 0) {
-            return @"Images/CellActiveUpperLeft.png";
+            return isHint ? @"Images/CellHintUpperLeft.png" : @"Images/CellActiveUpperLeft.png";
         } else if (col == CELL_ROW_MAX - 1) {
-            return @"Images/CellActiveUpperRight.png";
+            return isHint ? @"Images/CellHintUpperRight.png" : @"Images/CellActiveUpperRight.png";
         }
     }
     if (row == CELL_ROW_MAX - 1) {
         if (col == 0) {
-            return @"Images/CellActiveLowerLeft.png";
+            return isHint ? @"Images/CellHintLowerLeft.png" : @"Images/CellActiveLowerLeft.png";
         } else if (col == CELL_ROW_MAX - 1) {
-            return @"Images/CellActiveLowerRight.png";
+            return isHint ? @"Images/CellHintLowerRight.png" : @"Images/CellActiveLowerRight.png";
         }
     }
-    return @"Images/CellActiveSquare.png";
+    return isHint ? @"Images/CellHintSquare.png" : @"Images/CellActiveSquare.png";
+}
+
+- (NSString *)childNameWithRow:(NSInteger)row col:(NSInteger)col {
+    return [NSString stringWithFormat:@"%lu, %lu", row, col];
 }
 @end

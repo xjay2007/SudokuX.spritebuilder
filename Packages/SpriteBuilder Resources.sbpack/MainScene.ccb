@@ -474,6 +474,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -658,7 +660,7 @@
 				<key>displayName</key>
 				<string>_controlBoard</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_controlBoard</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -728,7 +730,7 @@
 		<key>customClass</key>
 		<string>MainScene</string>
 		<key>displayName</key>
-		<string>CCNode</string>
+		<string>MainScene</string>
 		<key>memberVarAssignmentName</key>
 		<string></string>
 		<key>memberVarAssignmentType</key>

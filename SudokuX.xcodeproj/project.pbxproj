@@ -89,6 +89,9 @@
 		B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3F17B978D7009739AE /* CoreGraphics.framework */; };
 		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
 		B78A0B10198AF87200C63841 /* Published-Android in Resources */ = {isa = PBXBuildFile; fileRef = B78A0B0F198AF87200C63841 /* Published-Android */; };
+		B7B183781A4A52430071D662 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B183771A4A52430071D662 /* MenuScene.m */; };
+		B7B183791A4A52430071D662 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B183771A4A52430071D662 /* MenuScene.m */; };
+		B7B1837A1A4A52430071D662 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B183771A4A52430071D662 /* MenuScene.m */; };
 		B7B4691A1A3A8BC9006FF375 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B469031A3A8BC9006FF375 /* Position.m */; };
 		B7B4691B1A3A8BC9006FF375 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B469031A3A8BC9006FF375 /* Position.m */; };
 		B7B4691C1A3A8BC9006FF375 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B469031A3A8BC9006FF375 /* Position.m */; };
@@ -298,6 +301,8 @@
 		B77F1B3F17B978D7009739AE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B77F1B4117B978D7009739AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B78A0B0F198AF87200C63841 /* Published-Android */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Published-Android"; sourceTree = "<group>"; };
+		B7B183761A4A52430071D662 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
+		B7B183771A4A52430071D662 /* MenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
 		B7B3713D180358F1007369CC /* libObjectiveChipmunk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libObjectiveChipmunk.a; path = "../libs/cocos2d-iphone/external/Chipmunk/xcode/build/Debug-iphoneos/libObjectiveChipmunk.a"; sourceTree = "<group>"; };
 		B7B469011A3A8BC9006FF375 /* appEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appEnums.h; sourceTree = "<group>"; };
 		B7B469021A3A8BC9006FF375 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
@@ -569,6 +574,7 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B7B427751A49122C0092300F /* Game */,
 				B7BDB9F91A3E78360026D44D /* Views */,
 				B7B469001A3A8BC8006FF375 /* Common */,
 				B7B469041A3A8BC9006FF375 /* Generator */,
@@ -673,6 +679,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B7B427751A49122C0092300F /* Game */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Game;
+			path = Source/Game;
+			sourceTree = "<group>";
+		};
 		B7B469001A3A8BC8006FF375 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -757,6 +771,8 @@
 		B7BDB9F91A3E78360026D44D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B7B183761A4A52430071D662 /* MenuScene.h */,
+				B7B183771A4A52430071D662 /* MenuScene.m */,
 				B7BDB9FA1A3E78360026D44D /* MainScene.h */,
 				B7BDB9FB1A3E78360026D44D /* MainScene.m */,
 				B7BDB9FF1A3E78660026D44D /* GameBoard.h */,
@@ -1095,6 +1111,7 @@
 				B7B469411A3A8BC9006FF375 /* NakedSubsetTechnique.m in Sources */,
 				B7B469211A3A8BC9006FF375 /* Generator.m in Sources */,
 				B7B5D5511A3000CE002D52DA /* FastBitArray.m in Sources */,
+				B7B1837A1A4A52430071D662 /* MenuScene.m in Sources */,
 				B7B469451A3A8BC9006FF375 /* XwingTechnique.m in Sources */,
 				7A40360419DDEE84007B6E8F /* main.m in Sources */,
 				7A59498E19E3941300F65F90 /* AppDelegate.m in Sources */,
@@ -1126,6 +1143,7 @@
 				B7B469431A3A8BC9006FF375 /* XwingTechnique.m in Sources */,
 				B7B5D5561A300BD3002D52DA /* SolverOptions.m in Sources */,
 				B7B4BD421A3044DB00D1FEE6 /* PuzzleState.m in Sources */,
+				B7B183791A4A52430071D662 /* MenuScene.m in Sources */,
 				B7C15FCF1A47B92800EBB6D8 /* ControlButton.m in Sources */,
 				B7B5D54F1A3000CE002D52DA /* FastBitArray.m in Sources */,
 				B7B4693F1A3A8BC9006FF375 /* NakedSubsetTechnique.m in Sources */,
@@ -1152,6 +1170,7 @@
 				B7B4692A1A3A8BC9006FF375 /* BlockAndColumnRowInteractionTechnique.m in Sources */,
 				B7B4693E1A3A8BC9006FF375 /* NakedSubsetTechnique.m in Sources */,
 				B7B4691E1A3A8BC9006FF375 /* Generator.m in Sources */,
+				B7B183781A4A52430071D662 /* MenuScene.m in Sources */,
 				B7B5D54E1A3000CE002D52DA /* FastBitArray.m in Sources */,
 				B7B469421A3A8BC9006FF375 /* XwingTechnique.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,

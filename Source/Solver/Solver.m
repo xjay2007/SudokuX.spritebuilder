@@ -84,14 +84,14 @@ static NSArray *FillCellsWithSolePossibleNumber(PuzzleState *state, NSArray *tec
     // though it probably doesn't matter as the first thing
     // SolveInternal does is make a clone, and RaiseStateChangedEvent
     // is not cloned (on purpose).
-    BOOL isRaiseChangedEvent = state.isRaisedStateChangedEvent;
-    state.isRaisedStateChangedEvent = NO;
+    BOOL isRaiseChangedEvent = state.isRaiseStateChangedEvent;
+    state.isRaiseStateChangedEvent = NO;
     
     // Attempt to solve the puzzle
     SolverResults *results = SolveInternal(state, options);
     
     // Reset whether changed events should be raised
-    state.isRaisedStateChangedEvent = isRaiseChangedEvent;
+    state.isRaiseStateChangedEvent = isRaiseChangedEvent;
     
     if (isAddedTechnique) {
         options.eliminationTechniques = @[];

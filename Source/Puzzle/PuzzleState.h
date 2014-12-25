@@ -22,9 +22,9 @@
     
     NSNumber            *   _filledCells; // The number of cells currently filled in the puzzle.
     PuzzleStatus            _status; // The puzzle's current status.  Invalidated every time the puzzle is changed.
-    id<PuzzleStateDelegate> __weak _delegate;
+    
     void                    (^_stateChanged)(NSArray *args); // Event raised when a cell in the grid changes its contained value.
-    BOOL                    _isRaisedStateChangedEvent; // Whether to raise state changed events.
+    BOOL                    _isRaiseStateChangedEvent; // Whether to raise state changed events.
 }
 @property (nonatomic, readonly) Byte                boxSize; // The size of each box in the puzzle
 @property (nonatomic, readonly) Byte                gridSize; // The size of the entire puzzle.
@@ -32,7 +32,7 @@
 @property (nonatomic, readonly) PuzzleStatus        status;
 @property (nonatomic, strong)   id                  tag;
 @property (nonatomic, weak) id<PuzzleStateDelegate> delegate;
-@property (nonatomic, assign)   BOOL                isRaisedStateChangedEvent;
+@property (nonatomic, assign)   BOOL                isRaiseStateChangedEvent;
 @property (nonatomic, readonly) NSInteger           numberOfFilledCells;
 
 @property (nonatomic, readonly) NSArray         *   gridArray;

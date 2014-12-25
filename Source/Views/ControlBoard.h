@@ -6,8 +6,14 @@
 //  Copyright (c) 2014年 Apportable. All rights reserved.
 //
 
-#import "CCNode.h"
+@class ControlBoard, ControlButton;
+@protocol ControlBoardDelegate <NSObject>
+@optional
+- (void)controlBoard:(ControlBoard *)board button:(ControlButton *)button onClickFunction:(ControlButtonFunction)function;
+
+@end
 
 @interface ControlBoard : CCNode
 
+@property (nonatomic, weak) id<ControlBoardDelegate>        delegate;
 @end

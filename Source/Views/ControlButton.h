@@ -6,8 +6,6 @@
 //  Copyright (c) 2014年 Apportable. All rights reserved.
 //
 
-#import "cocos2d.h"
-
 @class ControlButton;
 @protocol ControlButtonDelegate <NSObject>
 @optional

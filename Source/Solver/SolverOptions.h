@@ -20,4 +20,6 @@
 @property (nonatomic, copy) NSArray           *   eliminationTechniques; // EliminationTechnique[]
 // Whether to allow brute-force techniques in the solver.
 @property (nonatomic, assign) BOOL                  isAllowBruteForce;
+
++ (instancetype)options;
 @end

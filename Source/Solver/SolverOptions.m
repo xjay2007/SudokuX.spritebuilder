@@ -16,6 +16,9 @@
 @synthesize isAllowBruteForce = _isAllowBruteForce;
 @synthesize eliminationTechniques = _techniques;
 
++ (instancetype)options {
+    return [[[self class] alloc] init];
+}
 - (instancetype)init
 {
     self = [super init];
