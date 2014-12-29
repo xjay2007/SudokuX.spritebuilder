@@ -92,6 +92,9 @@
 		B7B183781A4A52430071D662 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B183771A4A52430071D662 /* MenuScene.m */; };
 		B7B183791A4A52430071D662 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B183771A4A52430071D662 /* MenuScene.m */; };
 		B7B1837A1A4A52430071D662 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B183771A4A52430071D662 /* MenuScene.m */; };
+		B7B455A81A4D0B86002C2548 /* LoadingScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B455A71A4D0B86002C2548 /* LoadingScene.m */; };
+		B7B455A91A4D0B86002C2548 /* LoadingScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B455A71A4D0B86002C2548 /* LoadingScene.m */; };
+		B7B455AA1A4D0B86002C2548 /* LoadingScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B455A71A4D0B86002C2548 /* LoadingScene.m */; };
 		B7B4691A1A3A8BC9006FF375 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B469031A3A8BC9006FF375 /* Position.m */; };
 		B7B4691B1A3A8BC9006FF375 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B469031A3A8BC9006FF375 /* Position.m */; };
 		B7B4691C1A3A8BC9006FF375 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B469031A3A8BC9006FF375 /* Position.m */; };
@@ -304,6 +307,9 @@
 		B7B183761A4A52430071D662 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
 		B7B183771A4A52430071D662 /* MenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
 		B7B3713D180358F1007369CC /* libObjectiveChipmunk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libObjectiveChipmunk.a; path = "../libs/cocos2d-iphone/external/Chipmunk/xcode/build/Debug-iphoneos/libObjectiveChipmunk.a"; sourceTree = "<group>"; };
+		B7B455A61A4D0B86002C2548 /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
+		B7B455A71A4D0B86002C2548 /* LoadingScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingScene.m; sourceTree = "<group>"; };
+		B7B455AC1A4D0C9B002C2548 /* appMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appMacros.h; sourceTree = "<group>"; };
 		B7B469011A3A8BC9006FF375 /* appEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appEnums.h; sourceTree = "<group>"; };
 		B7B469021A3A8BC9006FF375 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
 		B7B469031A3A8BC9006FF375 /* Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Position.m; sourceTree = "<group>"; };
@@ -693,6 +699,7 @@
 				B7B469011A3A8BC9006FF375 /* appEnums.h */,
 				B7B469021A3A8BC9006FF375 /* Position.h */,
 				B7B469031A3A8BC9006FF375 /* Position.m */,
+				B7B455AC1A4D0C9B002C2548 /* appMacros.h */,
 			);
 			name = Common;
 			path = Source/Common;
@@ -781,6 +788,8 @@
 				B7C15FCD1A47B92800EBB6D8 /* ControlButton.m */,
 				B7C15FD21A47C0B800EBB6D8 /* ControlBoard.h */,
 				B7C15FD31A47C0B800EBB6D8 /* ControlBoard.m */,
+				B7B455A61A4D0B86002C2548 /* LoadingScene.h */,
+				B7B455A71A4D0B86002C2548 /* LoadingScene.m */,
 			);
 			name = Views;
 			path = Source/Views;
@@ -1107,6 +1116,7 @@
 				B7B5D5581A300BD3002D52DA /* SolverOptions.m in Sources */,
 				B7B469291A3A8BC9006FF375 /* BeginnerTechnique.m in Sources */,
 				B7B4BD441A3044DB00D1FEE6 /* PuzzleState.m in Sources */,
+				B7B455AA1A4D0B86002C2548 /* LoadingScene.m in Sources */,
 				B7B4692D1A3A8BC9006FF375 /* BlockAndColumnRowInteractionTechnique.m in Sources */,
 				B7B469411A3A8BC9006FF375 /* NakedSubsetTechnique.m in Sources */,
 				B7B469211A3A8BC9006FF375 /* Generator.m in Sources */,
@@ -1134,6 +1144,7 @@
 			files = (
 				B7B4BD3B1A303FDD00D1FEE6 /* SolverResults.m in Sources */,
 				B7B469331A3A8BC9006FF375 /* HiddenSingleTechnique.m in Sources */,
+				B7B455A91A4D0B86002C2548 /* LoadingScene.m in Sources */,
 				B7C15FD51A47C0B800EBB6D8 /* ControlBoard.m in Sources */,
 				B7BDBA021A3E78660026D44D /* GameBoard.m in Sources */,
 				B7B469271A3A8BC9006FF375 /* BeginnerTechnique.m in Sources */,
@@ -1166,6 +1177,7 @@
 				B7B5D5551A300BD3002D52DA /* SolverOptions.m in Sources */,
 				B7B469261A3A8BC9006FF375 /* BeginnerTechnique.m in Sources */,
 				B7B4BD411A3044DB00D1FEE6 /* PuzzleState.m in Sources */,
+				B7B455A81A4D0B86002C2548 /* LoadingScene.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				B7B4692A1A3A8BC9006FF375 /* BlockAndColumnRowInteractionTechnique.m in Sources */,
 				B7B4693E1A3A8BC9006FF375 /* NakedSubsetTechnique.m in Sources */,

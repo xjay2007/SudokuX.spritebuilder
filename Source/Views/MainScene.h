@@ -39,4 +39,7 @@
 }
 
 + (CCScene *)sceneWithDifficutyLevel:(PuzzleDifficulty)level;
+
++ (CCScene *)sceneWithState:(PuzzleState *)state;
+
 @end

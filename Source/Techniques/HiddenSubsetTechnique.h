@@ -8,8 +8,12 @@
 
 #import "EliminationTechnique.h"
 
-@interface HiddenSubsetTechnique : EliminationTechnique
-
+@interface HiddenSubsetTechnique : EliminationTechnique {
+    @private
+    // The size of the subset to evaluate.
+    NSInteger           _subsetSize;
+    NSMutableArray  *   _foundLocations;
+}
 @end
 
 @interface HiddenPairTechnique : HiddenSubsetTechnique

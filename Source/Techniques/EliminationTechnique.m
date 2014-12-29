@@ -15,8 +15,15 @@ static NSMutableArray   *   _allAvailableTechniques = nil; // Base type used for
 static NSString * const subclassnames[] = {
     @"BeginnerTechnique",
     @"NakedSingleTechnique",
-//    @"BlockAndColumnRowInteractionTechnique",
-//    @"HiddenSingleTechnique",
+    @"HiddenSingleTechnique",
+    @"BlockAndColumnRowInteractionTechnique",
+    @"NakedPairTechnique",
+    @"HiddenPairTechnique",
+    @"NakedTripletTechnique",
+    @"HiddenTripletTechnique",
+    @"NakedQuadTechnique",
+    @"HiddenQuadTechnique",
+    @"XwingTechnique",
 };
 
 @interface EliminationTechnique()
@@ -59,7 +66,7 @@ static NSString * const subclassnames[] = {
                           row:(NSInteger)row
                        target:(NSMutableArray *)target {
     NSMutableArray *obj = target;
-    for (NSInteger i = 0; i < [obj count]; ++i) {
+    for (NSInteger i = 0; i < [possibleNumbers[row] count]; ++i) {
         obj[i] = possibleNumbers[row][i];
     }
 }
@@ -67,7 +74,7 @@ static NSString * const subclassnames[] = {
                           column:(NSInteger)column
                           target:(NSMutableArray *)target {
     NSMutableArray *obj = target;
-    for (NSInteger i = 0; i < [obj count]; ++i) {
+    for (NSInteger i = 0; i < [possibleNumbers count]; ++i) {
         obj[i] = possibleNumbers[i][column];
     }
 }

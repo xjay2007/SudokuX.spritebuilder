@@ -7,18 +7,6 @@
 #define SUDOKU_TABLE_LENGTH            9
 #define SUDOKU_BLOCK_LENGTH            3
 
-#define COUNTER_DEBUG           1
-
-#if COUNTER_DEBUG
-#define COUNTER_START()         long ___counter___ = 0;clock_t ___t0___ = clock();
-#define COUNTER_INCREASE()      {++___counter___;}
-#define COUNTER_END()           {clock_t ___t1___ = clock(); printf("\n----------\ncounter == %ld\ntime = %f\n----------\n", ___counter___, (double)(___t1___ - ___t0___) / CLOCKS_PER_SEC);}
-#else
-#define COUNTER_START()         do{}while(0);
-#define COUNTER_INCREASE()      do{}while(0);
-#define COUNTER_END()           do{}while(0);
-#endif //
-
 
 @interface MainScene () <GameBoardDelegate, ControlBoardDelegate, PuzzleStateDelegate>
 @property (nonatomic, strong) PuzzleState       *   state;
@@ -37,6 +25,14 @@
 
 @implementation MainScene
 
++ (CCScene *)sceneWithState:(PuzzleState *)state {
+    MainScene *node = (MainScene *)[CCBReader load:@"MainScene"];
+    [node loadNewPuzzleWithState:state];
+    CCScene *scene = [CCScene node];
+    [scene addChild:node];
+    return scene;
+}
+
 + (CCScene *)sceneWithDifficutyLevel:(PuzzleDifficulty)level {
     MainScene *node = (MainScene *)[CCBReader load:@"MainScene"];
     [node generateNewPuzzleWithLevel:level];
@@ -45,8 +41,9 @@
     return scene;
 }
 
-- (void)reload:(id)sender {
-    [[CCDirector sharedDirector] replaceScene:[MainScene sceneWithDifficutyLevel:PuzzleDifficultyEasy]];
+- (void)onQuit:(id)sender {
+//    [[CCDirector sharedDirector] replaceScene:[MainScene sceneWithDifficutyLevel:PuzzleDifficultyEasy]];
+    [[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MenuScene"]];
 }
 
 - (void)didLoadFromCCB {
@@ -103,8 +100,8 @@
 - (void)puzzleState:(PuzzleState *)state stateChanged:(NSArray *)args {
     if (state.status == PuzzleStatusSolved) {
         // TODO: Sudoku Solved.
+        CCLOG(@"state solved");
     }
-    CCLOG(@"state changed");
 }
 
 #pragma mark - Accessor
@@ -142,11 +139,13 @@
 }
 
 - (void)loadNewPuzzleWithState:(PuzzleState *)state {
+    COUNTER_START();
     [self clearUndoCheckpoints];
     [self clearOriginalPuzzleCheckpoint];
     [self setOriginalPuzzleCheckpoint:[state copy]];
     self.state = state;
     self.selectedCell = ccp(-1, -1);
+    COUNTER_END();
 }
 
 - (void)clearUndoCheckpoints {

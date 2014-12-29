@@ -143,30 +143,40 @@
     NSInteger filledCellCount = (self.options.isEnsureSymmetry && ([filledCells count] % 2 != 0)) ? ([filledCells count] - 1) : [filledCells count];
     if (self.options.isEnsureSymmetry) {
         // Find the middle cell and put it at the end of the ordering
-        for (NSInteger i = 0; i < [filledCells count] - 1; ++i) {
-            CGPoint p = [(NSNumber *)(filledCells[i]) CGPointValue];
-            NSInteger px = p.x;
-            NSInteger py = p.y;
-            if (px == newPuzzle.gridSize - px - 1 &&
-                py == newPuzzle.gridSize - py - 1) {
-                [filledCells exchangeObjectAtIndex:i withObjectAtIndex:[filledCells count] - 1];
-            }
+//        for (NSInteger i = 0; i < [filledCells count] - 1; ++i) {
+//            CGPoint p = [(NSValue *)(filledCells[i]) CGPointValue];
+//            NSInteger px = p.x;
+//            NSInteger py = p.y;
+//            if (px == newPuzzle.gridSize - px - 1 &&
+//                py == newPuzzle.gridSize - py - 1) {
+//                [filledCells exchangeObjectAtIndex:i withObjectAtIndex:[filledCells count] - 1];
+//            }
+//        }
+        NSInteger px = (newPuzzle.gridSize - 1) / 2;
+        NSInteger py = (newPuzzle.gridSize - 1) / 2;
+        NSInteger middleIndex = [filledCells indexOfObject:[NSValue valueWithCGPoint:ccp(px, py)]];
+        if (middleIndex != NSNotFound && middleIndex != filledCells.count - 1) {
+            [filledCells exchangeObjectAtIndex:middleIndex withObjectAtIndex:filledCells.count - 1];
         }
         
         // Modify the random ordering so that paired symmetric cells are next to each other
         // i.e. filledCells[i] and filledCells[i+1] are symmetric pairs
         for (NSInteger i = 0; i < [filledCells count] - 1; i += 2) {
-            CGPoint p = [(NSNumber *)(filledCells[i]) CGPointValue];
+            CGPoint p = [(NSValue *)(filledCells[i]) CGPointValue];
             NSInteger spx = newPuzzle.gridSize - (NSInteger)(p.x) - 1;
             NSInteger spy = newPuzzle.gridSize - (NSInteger)(p.y) - 1;
-            for (NSInteger j = i + 1; j < [filledCells count]; ++j) {
-                CGPoint pj = [(NSNumber *)(filledCells[j]) CGPointValue];
-                NSInteger pjx = pj.x;
-                NSInteger pjy = pj.y;
-                if (pjx == spx && pjy == spy) {
-                    [filledCells exchangeObjectAtIndex:i+1 withObjectAtIndex:j];
-                    break;
-                }
+//            for (NSInteger j = i + 1; j < [filledCells count]; ++j) {
+//                CGPoint pj = [(NSValue *)(filledCells[j]) CGPointValue];
+//                NSInteger pjx = pj.x;
+//                NSInteger pjy = pj.y;
+//                if (pjx == spx && pjy == spy) {
+//                    [filledCells exchangeObjectAtIndex:i+1 withObjectAtIndex:j];
+//                    break;
+//                }
+            //            }
+            NSInteger pairedIndex = [filledCells indexOfObject:[NSValue valueWithCGPoint:ccp(spx, spy)] inRange:NSMakeRange(i + 1, filledCells.count - i - 1)];
+            if (pairedIndex != NSNotFound && pairedIndex != i + 1) {
+                [filledCells exchangeObjectAtIndex:i + 1 withObjectAtIndex:pairedIndex];
             }
         }
         
@@ -177,8 +187,8 @@
         for (NSInteger filledCellNum = 0; filledCellNum < filledCellCount && newPuzzle.numberOfFilledCells > self.options.minimumFilledCells; filledCellNum += 2) {
             // Store the old value so we can put it back if necessary,
             // then wipe it out of the cell
-            CGPoint p1 = [(NSNumber *)(filledCells[filledCellNum]) CGPointValue];
-            CGPoint p2 = [(NSNumber *)(filledCells[filledCellNum + 1]) CGPointValue];
+            CGPoint p1 = [(NSValue *)(filledCells[filledCellNum]) CGPointValue];
+            CGPoint p2 = [(NSValue *)(filledCells[filledCellNum + 1]) CGPointValue];
             oldValues[0] = [newPuzzle cellValueAtPoint:p1];
             oldValues[1] = [newPuzzle cellValueAtPoint:p2];
             [newPuzzle setCellValue:nil atPoint:p1];

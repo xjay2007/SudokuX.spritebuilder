@@ -166,10 +166,10 @@ static NSMutableArray *InstantiatePossibleNumbersArray(PuzzleState *state);
 }
 
 - (NSArray *)computePossibleNumbersWithTechniques:(NSArray *)techniques
-                                         usesOfTechnique:(NSMutableDictionary **)usesOfTechnique // HashTable
-                                           isOnlyOnePass:(BOOL)isOnlyOnePass
-                                isEarlyExitWhenSoleFound:(BOOL)isEarlyExitWhenSoleFound
-                                         possibleNumbers:(NSArray *)possibleNumbers {
+                                  usesOfTechnique:(NSMutableDictionary **)usesOfTechnique // HashTable
+                                    isOnlyOnePass:(BOOL)isOnlyOnePass
+                         isEarlyExitWhenSoleFound:(BOOL)isEarlyExitWhenSoleFound
+                                  possibleNumbers:(NSArray *)possibleNumbers {
     // Initialize the possible numbers grid
     [possibleNumbers enumerateObjectsUsingBlock:^(NSArray *arr, NSUInteger i, BOOL *stop) {
         [arr enumerateObjectsUsingBlock:^(FastBitArray *obj, NSUInteger j, BOOL *stop) {

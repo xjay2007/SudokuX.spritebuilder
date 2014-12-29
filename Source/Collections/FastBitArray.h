@@ -27,9 +27,7 @@
 // The number of set bits in the array.
 @property(nonatomic, readonly) NSInteger        countSet;
 
-
-- (NSArray *)bitsArray;
-- (void)setBitsArray:(NSArray *)array;
-- (void)bits:(BOOL **)bits length:(NSInteger *)length;
-- (void)setBits:(BOOL [])bits length:(NSInteger)length;
+/// <summary>Gets an array of the values set in the bit array.</summary>
+/// <returns>An array of the values set.</returns>
+- (NSArray *)bitsArray; //
 @end

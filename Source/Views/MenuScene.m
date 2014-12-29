@@ -7,12 +7,13 @@
 //
 
 #import "MenuScene.h"
+#import "LoadingScene.h"
 #import "MainScene.h"
 
 @implementation MenuScene
 
 - (void)onSelectALevel:(CCNode *)button {
     PuzzleDifficulty level = [button.name integerValue];
-    [[CCDirector sharedDirector] replaceScene:[MainScene sceneWithDifficutyLevel:level]];
+    [[CCDirector sharedDirector] replaceScene:[LoadingScene sceneWithDifficutyLevel:level]];
 }
 @end

@@ -71,38 +71,22 @@ const int MAX_LENGTH = 32;
 - (NSArray *)bitsArray {
     NSMutableArray *ret = [NSMutableArray arrayWithCapacity:self.length];
     for (NSInteger i = 0; i < self.length; ++i) {
-        BOOL value = [self valueAtIndex:i];
-        [ret addObject:@(value)];
+        if([self valueAtIndex:i]) {
+            [ret addObject:@(i)];
+        }
     }
     return [ret copy];
-}
-- (void)setBitsArray:(NSArray *)array {
-    [self setAllValue:NO];
-    self.length = MIN([array count], MAX_LENGTH);
-    for (NSInteger i = 0; i < self.length; ++i) {
-        [self setValue:[array[i] boolValue] atIndex:i];
-    }
-}
-- (void)bits:(BOOL **)bits length:(NSInteger *)length {
-    *length = self.length;
-    for (NSInteger i = 0; i < self.length; ++i) {
-        *bits[i] = [self valueAtIndex:i];
-    }
-}
-- (void)setBits:(BOOL [])bits length:(NSInteger)length {
-    [self setAllValue:NO];
-    self.length = MIN(length, MAX_LENGTH);
-    for (NSInteger i = 0; i < self.length; ++i) {
-        [self setValue:bits[i] atIndex:i];
-    }
 }
 
 - (NSString *)description {
     NSMutableString *ret = [NSMutableString stringWithString:[super description]];
+    NSMutableString *numStr = [NSMutableString string];
     [ret appendString:@":"];
     for (NSInteger i = self.length - 1; i >= 0; --i) {
         [ret appendFormat:@"%d", [self valueAtIndex:i] ? 1 : 0];
+        [numStr appendFormat:@"%@", [self valueAtIndex:i] ? @(i) : @" "];
     }
+    [ret appendFormat:@", %@", numStr];
     return ret;
 }
 @end

@@ -6,4 +6,5 @@
 #import "cocos2d-ui.h"
 #endif
 
+#import "appMacros.h"
 #import "appEnums.h"

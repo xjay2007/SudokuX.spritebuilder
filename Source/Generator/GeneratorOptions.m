@@ -17,13 +17,13 @@
 #import "XwingTechnique.h"
 
 @interface GeneratorOptions ()
-- (instancetype)initWithSize:(Byte)size
-                  difficulty:(PuzzleDifficulty)difficulty
-                minimumFilledCells:(NSInteger)minimumFilledCells
-     maximumNumberOfDecisionPoints:(NSNumber *)maximumNumberOfDecisionPoints
-                   numberOfPuzzles:(NSInteger)numberOfPuzzles
-                        techniques:(NSArray *)techniques
-                  isEnsureSymmetry:(BOOL)isEnsureSymmetry;
+- (instancetype)    initWithSize:(Byte)size
+                      difficulty:(PuzzleDifficulty)difficulty
+              minimumFilledCells:(NSInteger)minimumFilledCells
+   maximumNumberOfDecisionPoints:(NSNumber *)maximumNumberOfDecisionPoints
+                 numberOfPuzzles:(NSInteger)numberOfPuzzles
+                      techniques:(NSArray *)techniques
+                isEnsureSymmetry:(BOOL)isEnsureSymmetry;
 @end
 
 @implementation GeneratorOptions
@@ -36,7 +36,7 @@
                                            difficulty:PuzzleDifficultyEasy
                                    minimumFilledCells:32
                         maximumNumberOfDecisionPoints:@0
-                                      numberOfPuzzles:3
+                                      numberOfPuzzles:1//3
                                            techniques:@[
                                                         [BeginnerTechnique technique]
                                                         ]
@@ -47,7 +47,7 @@
                                            difficulty:PuzzleDifficultyMedium
                                    minimumFilledCells:0
                         maximumNumberOfDecisionPoints:@0
-                                      numberOfPuzzles:10
+                                      numberOfPuzzles:1//10
                                            techniques:@[
                                                         [BeginnerTechnique technique],
                                                         [NakedSingleTechnique technique],
@@ -60,26 +60,25 @@
                                      isEnsureSymmetry:YES];
         }
         case PuzzleDifficultyHard: {
-            return [[[self class] alloc]
-                    initWithSize:3
-                    difficulty:PuzzleDifficultyHard
-                    minimumFilledCells:0
-                    maximumNumberOfDecisionPoints:nil
-                    numberOfPuzzles:20
-                    techniques:@[
-                                 [BeginnerTechnique technique],
-                                 [NakedSingleTechnique technique],
-                                 [HiddenSingleTechnique technique],
-                                 [BlockAndColumnRowInteractionTechnique technique],
-                                 [NakedPairTechnique technique],
-                                 [HiddenPairTechnique technique],
-                                 [NakedTripletTechnique technique],
-                                 [HiddenTripletTechnique technique],
-                                 [NakedQuadTechnique technique],
-                                 [HiddenQuadTechnique technique],
-                                 [XwingTechnique technique],
-                                 ]
-                    isEnsureSymmetry:YES];
+            return [[[self class] alloc] initWithSize:3
+                                           difficulty:PuzzleDifficultyHard
+                                   minimumFilledCells:0
+                        maximumNumberOfDecisionPoints:nil
+                                      numberOfPuzzles:1//20
+                                           techniques:@[
+                                                        [BeginnerTechnique technique],
+                                                        [NakedSingleTechnique technique],
+                                                        [HiddenSingleTechnique technique],
+                                                        [BlockAndColumnRowInteractionTechnique technique],
+                                                        [NakedPairTechnique technique],
+                                                        [HiddenPairTechnique technique],
+                                                        [NakedTripletTechnique technique],
+                                                        [HiddenTripletTechnique technique],
+                                                        [NakedQuadTechnique technique],
+                                                        [HiddenQuadTechnique technique],
+                                                        [XwingTechnique technique],
+                                                        ]
+                                     isEnsureSymmetry:YES];
         }
             
         default:
@@ -89,13 +88,13 @@
     return nil;
 }
 
-- (instancetype)initWithSize:(Byte)size
-                  difficulty:(PuzzleDifficulty)difficulty
-          minimumFilledCells:(NSInteger)minimumFilledCells
-maximumNumberOfDecisionPoints:(NSNumber *)maximumNumberOfDecisionPoints
-             numberOfPuzzles:(NSInteger)numberOfPuzzles
-                  techniques:(NSArray *)techniques
-            isEnsureSymmetry:(BOOL)isEnsureSymmetry {
+- (instancetype)    initWithSize:(Byte)size
+                      difficulty:(PuzzleDifficulty)difficulty
+              minimumFilledCells:(NSInteger)minimumFilledCells
+   maximumNumberOfDecisionPoints:(NSNumber *)maximumNumberOfDecisionPoints
+                 numberOfPuzzles:(NSInteger)numberOfPuzzles
+                      techniques:(NSArray *)techniques
+                isEnsureSymmetry:(BOOL)isEnsureSymmetry {
     self = [super init];
     if (self) {
         NSAssert(size == 3, @"size");
