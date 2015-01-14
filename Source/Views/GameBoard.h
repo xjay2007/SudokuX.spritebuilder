@@ -13,10 +13,6 @@
 - (void)gameBoard:(GameBoard *)board onSelectPoint:(CGPoint)point;
 
 @required
-- (void)gameBoard:(GameBoard *)board
-   getLabelString:(NSString **)string
-         andColor:(CCColor **)color
-            atRow:(NSInteger)row col:(NSInteger)col;
 @end
 
 @interface GameBoard : CCSprite {
@@ -28,9 +24,9 @@
 
 @property (nonatomic, weak) id<GameBoardDelegate> delegate;
 
-- (void)updateAllGrid;
 
-- (void)updateCellAtRow:(NSInteger)row col:(NSInteger)col;
+- (void)updatePenAtRow:(NSInteger)row col:(NSInteger)col label:(NSString *)label color:(CCColor *)color;
+- (void)updateNotesAtRow:(NSInteger)row col:(NSInteger)col numbers:(NSArray *)numbers colors:(NSArray *)colors;
 
 // highlight
 - (void)resetAllHighlights;

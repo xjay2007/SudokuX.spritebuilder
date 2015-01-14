@@ -118,7 +118,7 @@
     // Generate a full solution randomly, using the solver to solve a completely empty grid.
     // For this, we'll use the elimination techniques that yield fast solving.
     PuzzleState *solvedState = [PuzzleState stateWithBoxSize:self.options.size];
-    SolverOptions *solverOptions = [[SolverOptions alloc] init];
+    SolverOptions *solverOptions = [SolverOptions options];
     solverOptions.maximumSolutionsToFind = @1;
     solverOptions.eliminationTechniques = @[[NakedSingleTechnique technique]];
     solverOptions.isAllowBruteForce = YES;
@@ -229,7 +229,7 @@
         for (NSInteger filledCellNum = 0; filledCellNum < filledCellCount && newPuzzle.numberOfFilledCells > self.options.minimumFilledCells; ++filledCellNum) {
             // Store the old value so we can put it back if necessary,
             // then wipe it out of the cell
-            CGPoint p1 = [(NSNumber *)(filledCells[filledCellNum]) CGPointValue];
+            CGPoint p1 = [(NSValue *)(filledCells[filledCellNum]) CGPointValue];
             id oldValue = [newPuzzle cellValueAtPoint:p1];
             [newPuzzle setCellValue:nil atPoint:p1];
             

@@ -22,6 +22,8 @@ static const CGFloat    BOX_HEIGHT = CELL_HEIGHT * BOX_SIZE + CELL_GAP_HEIGHT * 
 
 static NSString *const  FONT_NAME = @"Helvetica-Bold";
 static const CGFloat    FONT_SIZE = 20;
+static NSString *const  NOTE_FONT_NAME = @"Helvetica";
+static const CGFloat    NOTE_SIZE = 9;
 
 @implementation GameBoard
 
@@ -42,6 +44,14 @@ static const CGFloat    FONT_SIZE = 20;
             nodeNote.anchorPoint = ccp(0.5f, 0.5f);
             nodeNote.name = name;
             [_noteGrid addChild:nodeNote];
+            // add note
+            for (NSInteger i = 0; i < CELL_ROW_MAX; ++i) {
+                CCLabelTTF *labelNote = [CCLabelTTF labelWithString:[@(i+1) stringValue] fontName:NOTE_FONT_NAME fontSize:NOTE_SIZE];
+                labelNote.position = ccp(CELL_WIDTH / (BOX_SIZE * 2) * (i % BOX_SIZE * 2 + 1), CELL_HEIGHT - (CELL_HEIGHT / (BOX_SIZE * 2) * (i / BOX_SIZE * 2 + 1)));
+                labelNote.visible = NO;
+                labelNote.name = [@(i) stringValue];
+                [nodeNote addChild:labelNote];
+            }
             
             // hightlight
             CCSprite *highlightImage = [CCSprite spriteWithImageNamed:[self cellHighlightedImageNameWithRow:row col:col isHint:NO]];
@@ -60,29 +70,23 @@ static const CGFloat    FONT_SIZE = 20;
     }
 }
 
-- (void)updateAllGrid {
-    for (NSInteger row = 0; row < CELL_ROW_MAX; ++row) {
-        for (NSInteger col = 0; col < CELL_COL_MAX; ++col) {
-            CCLabelTTF *labelPen = (CCLabelTTF *)[_numberGrid getChildByName:[self childNameWithRow:row col:col] recursively:NO];
-            NSString *string = @"";
-            CCColor *color = [CCColor blackColor];
-            [self.delegate gameBoard:self getLabelString:&string andColor:&color atRow:row col:col];
-            labelPen.string = string;
-            labelPen.color = color;
-        }
-    }
-}
-- (void)updateCellAtRow:(NSInteger)row col:(NSInteger)col {
-    [self updatePenAtRow:row col:col];
+#pragma mark Update
+
+- (void)updatePenAtRow:(NSInteger)row col:(NSInteger)col label:(NSString *)label color:(CCColor *)color {
+    CCLabelTTF *labelPen = (CCLabelTTF *)[_numberGrid getChildByName:[self childNameWithRow:row col:col] recursively:NO];
+    labelPen.string = label;
+    labelPen.color = color;
 }
 
-- (void)updatePenAtRow:(NSInteger)row col:(NSInteger)col {
-    CCLabelTTF *labelPen = (CCLabelTTF *)[_numberGrid getChildByName:[self childNameWithRow:row col:col] recursively:NO];
-    NSString *string = @"";
-    CCColor *color = [CCColor blackColor];
-    [self.delegate gameBoard:self getLabelString:&string andColor:&color atRow:row col:col];
-    labelPen.string = string;
-    labelPen.color = color;
+- (void)updateNotesAtRow:(NSInteger)row col:(NSInteger)col numbers:(NSArray *)numbers colors:(NSArray *)colors {
+    CCNode *nodeNote = [_noteGrid getChildByName:[self childNameWithRow:row col:col] recursively:NO];
+    for (CCLabelTTF *child in nodeNote.children) {
+        if ([child conformsToProtocol:@protocol(CCLabelProtocol)]) {
+            NSInteger idx = [numbers indexOfObject:@([child.name integerValue])];
+            child.visible = idx != NSNotFound;
+            child.color = idx < colors.count ? colors[idx] : [CCColor whiteColor];
+        }
+    }
 }
 
 #pragma mark Highlight

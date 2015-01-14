@@ -13,7 +13,10 @@
 
 @end
 
-@interface ControlBoard : CCNode
+@interface ControlBoard : CCNode {
+    CCNode          *   _buttonsNode;
+}
 
 @property (nonatomic, weak) id<ControlBoardDelegate>        delegate;
+@property (nonatomic, assign) BOOL                          isNotesOn;
 @end

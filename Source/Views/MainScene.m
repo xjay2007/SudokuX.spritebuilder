@@ -1,41 +1,25 @@
 #import "MainScene.h"
-#import "Generator.h"
+#import "LoadingScene.h"
+
 #import "GameBoard.h"
 #import "ControlBoard.h"
-#import "Solver.h"
+#import "WinBoard.h"
+
+#import "Game.h"
 
 #define SUDOKU_TABLE_LENGTH            9
 #define SUDOKU_BLOCK_LENGTH            3
 
 
-@interface MainScene () <GameBoardDelegate, ControlBoardDelegate, PuzzleStateDelegate>
-@property (nonatomic, strong) PuzzleState       *   state;
-@property (nonatomic, strong) PuzzleState       *   originalState;
-@property (nonatomic, strong) PuzzleState       *   solvedOriginalState;
-@property (nonatomic, assign) BOOL                  isShowSuggestedCells;
-@property (nonatomic, assign) BOOL                  isShowIncorrectNumbers;
-@property (nonatomic, assign) PuzzleDifficulty      difficutyLevel;
-@property (nonatomic, strong) NSMutableArray    *   undoStatesStack;
-@property (nonatomic, assign) CGPoint               selectedCell;
-
-@property (nonatomic, strong) CCColor           *   userValueColor;
-@property (nonatomic, strong) CCColor           *   originalValueColor;
-@property (nonatomic, strong) CCColor           *   incorrectValueColor;
+@interface MainScene () <GameDelegate, GameBoardDelegate, ControlBoardDelegate, WinBoardDelegate>
+@property (nonatomic, strong) Game              *   game;
 @end
 
 @implementation MainScene
 
-+ (CCScene *)sceneWithState:(PuzzleState *)state {
++ (CCScene *)sceneWithGame:(Game *)game {
     MainScene *node = (MainScene *)[CCBReader load:@"MainScene"];
-    [node loadNewPuzzleWithState:state];
-    CCScene *scene = [CCScene node];
-    [scene addChild:node];
-    return scene;
-}
-
-+ (CCScene *)sceneWithDifficutyLevel:(PuzzleDifficulty)level {
-    MainScene *node = (MainScene *)[CCBReader load:@"MainScene"];
-    [node generateNewPuzzleWithLevel:level];
+    node.game = game;
     CCScene *scene = [CCScene node];
     [scene addChild:node];
     return scene;
@@ -50,147 +34,73 @@
     
     _gameBoard.delegate = self;
     _controlBoard.delegate = self;
-    
-    _userValueColor = [CCColor blueColor];
-    _originalValueColor = [CCColor blackColor];
-    _incorrectValueColor = [CCColor redColor];
-    
-    _isShowIncorrectNumbers = YES;
 }
 
 - (void)onEnter {
     [super onEnter];
     
-    [_gameBoard updateAllGrid];
+    [self.game updateAllGrid];
+}
+
+- (void)setGame:(Game *)game {
+    if (_game != game) {
+        _game.delegate = nil;
+        _game = game;
+        _game.delegate = self;
+    }
 }
 
 #pragma Delegate
-- (void)gameBoard:(GameBoard *)board onSelectPoint:(CGPoint)point {
-    self.selectedCell = point;
-    [board resetAllHighlights];
-    [board highlightCellAtRow:point.x col:point.y isHint:NO];
+- (void)game:(Game *)game updatePenAtRow:(NSInteger)row col:(NSInteger)col label:(NSString *)label color:(CCColor *)color {
+    [_gameBoard updatePenAtRow:row col:col label:label color:color];
 }
-- (void)gameBoard:(GameBoard *)board getLabelString:(NSString *__autoreleasing *)string andColor:(CCColor *__autoreleasing *)color atRow:(NSInteger)row col:(NSInteger)col {
-    id cellValue = [self.state cellValueAtX:row y:col];
-    if ([cellValue isKindOfClass:[NSNumber class]]) {
-        id solvedCellValue = [self.solvedOriginalState cellValueAtX:row y:col];
-        if (self.isShowIncorrectNumbers && [solvedCellValue isKindOfClass:[NSNumber class]]
-            && [cellValue unsignedCharValue] != [solvedCellValue unsignedCharValue]) {
-            *color = self.incorrectValueColor;
-        } else {
-            id originalValue = [self.originalState cellValueAtX:row y:col];
-            if (self.originalState != nil && [originalValue isKindOfClass:[NSNumber class]]) {
-                *color = self.originalValueColor;
-            } else {
-                *color = self.userValueColor;
-            }
-        }
-        *string = [NSString stringWithFormat:@"%d", [cellValue unsignedCharValue] + 1];
+
+- (void)game:(Game *)game updateNotesAtRow:(NSInteger)row col:(NSInteger)col numbers:(NSArray *)numbers colors:(NSArray *)colors {
+    [_gameBoard updateNotesAtRow:row col:col numbers:numbers colors:colors];
+}
+
+- (void)game:(Game *)game updateIsNotesOn:(BOOL)isNotesOn {
+    _controlBoard.isNotesOn = isNotesOn;
+}
+
+- (void)game:(Game *)game updateHighlightedCells:(NSArray *)cells hintCells:(NSArray *)hintCells {
+    [_gameBoard resetAllHighlights];
+    [_gameBoard highlightCellsAtPoints:cells isHint:NO];
+    [_gameBoard highlightCellsAtPoints:hintCells isHint:YES];
+}
+
+- (void)gameBoard:(GameBoard *)board onSelectPoint:(CGPoint)point {
+    self.game.selectedCell = point;
+}
+
+- (void)game:(Game *)game didFinishAndIsWinning:(BOOL)isWinning {
+    if (isWinning) {
+        // TODO: play winnig animation
+        _gameBoard.userInteractionEnabled = NO;
+        _controlBoard.userInteractionEnabled = NO;
+        
+        WinBoard *winBoard = (WinBoard *)[CCBReader load:@"WinBoard"];
+        winBoard.positionType = CCPositionTypeNormalized;
+        winBoard.position = ccp(0.5f, 0.5f);
+        winBoard.scale = 0;
+        [[CCDirector sharedDirector].runningScene addChild:winBoard];
+        winBoard.delegate = self;
+        
+        [winBoard runAction:[CCActionEaseBackOut actionWithAction:[CCActionScaleTo actionWithDuration:0.5f scale:1]]];
     }
 }
 
 - (void)controlBoard:(ControlBoard *)board button:(ControlButton *)button onClickFunction:(ControlButtonFunction)function {
-    if (function < ControlButtonFunctionDigitIndexMax) {
-        if (self.state != nil && [self canModifyCell:self.selectedCell]) {
-            [self setStateCellValue:function atPoint:self.selectedCell];
-        }
-    }
+    [self.game clickFunction:function];
 }
 
-- (void)puzzleState:(PuzzleState *)state stateChanged:(NSArray *)args {
-    if (state.status == PuzzleStatusSolved) {
-        // TODO: Sudoku Solved.
-        CCLOG(@"state solved");
-    }
+- (void)winBoardOnReplay:(WinBoard *)winBoard {
+    [[CCDirector sharedDirector] replaceScene:[LoadingScene sceneWithDifficutyLevel:self.game.options.difficutyLevel]];
 }
 
-#pragma mark - Accessor
-
-- (NSMutableArray *)undoStatesStack {
-    if (_undoStatesStack == nil) {
-        _undoStatesStack = [[NSMutableArray alloc] init];
-    }
-    return _undoStatesStack;
+- (void)winBoardOnMenu:(WinBoard *)winBoard {
+    [self onQuit:nil];
 }
-
-- (void)setOriginalState:(PuzzleState *)originalState {
-    if (_originalState != originalState) {
-        [self setOriginalPuzzleCheckpoint:originalState];
-    }
-}
-
-- (void)setState:(PuzzleState *)state {
-    if (_state != state) {
-        _state.delegate = nil;
-        _state.isRaiseStateChangedEvent = NO;
-        _state = state;
-        _state.isRaiseStateChangedEvent = YES;
-        _state.delegate = self;
-    }
-}
-
-#pragma mark - set up
-
-- (void)generateNewPuzzleWithLevel:(PuzzleDifficulty)level {
-    COUNTER_START();
-    Generator *generator = [Generator generatorWithOptions:[GeneratorOptions createWithDifficulty:level]];
-    [self loadNewPuzzleWithState:[generator generate]];
-    COUNTER_END();
-}
-
-- (void)loadNewPuzzleWithState:(PuzzleState *)state {
-    COUNTER_START();
-    [self clearUndoCheckpoints];
-    [self clearOriginalPuzzleCheckpoint];
-    [self setOriginalPuzzleCheckpoint:[state copy]];
-    self.state = state;
-    self.selectedCell = ccp(-1, -1);
-    COUNTER_END();
-}
-
-- (void)clearUndoCheckpoints {
-    [self.undoStatesStack removeAllObjects];
-}
-
-- (void)setUndoCheckpoint {
-    if (self.state != nil) {
-        [self.undoStatesStack addObject:[self.state copy]];
-    }
-}
-
-- (void)clearOriginalPuzzleCheckpoint {
-    _originalState = nil;
-    _solvedOriginalState = nil;
-}
-
-- (void)setOriginalPuzzleCheckpoint:(PuzzleState *)original {
-    _originalState = original;
-    if (original != nil) {
-        SolverOptions *options = [SolverOptions options];
-        options.maximumSolutionsToFind = @2;
-        SolverResults *results = [Solver solveState:original options:options];
-        if (results.status == PuzzleStatusSolved && [results.puzzles count] == 1) {
-            self.solvedOriginalState = results.puzzle;
-        } else {
-            self.solvedOriginalState = nil;
-        }
-    }
-}
-
-- (void)setStateCellValue:(Byte)value atPoint:(CGPoint)point {
-    id cellvalue = [self.state cellValueAtPoint:point];
-    if (![cellvalue isKindOfClass:[NSNumber class]] || [cellvalue unsignedCharValue] != value) {
-        [self setUndoCheckpoint];
-        // TODO: remove note at this cell
-        [self.state setCellValue:@(value) atPoint:self.selectedCell];
-        [_gameBoard updateCellAtRow:self.selectedCell.x col:self.selectedCell.y];
-    }
-}
-
-- (BOOL)canModifyCell:(CGPoint)point {
-    return (point.x >= 0 && point.x < self.state.gridSize && point.y >= 0 && point.y < self.state.gridSize) && (self.originalState == nil || ![[self.originalState cellValueAtPoint:point] isKindOfClass:[NSNumber class]]);
-}
-
 /*
 - (void)generateSudoku {
     

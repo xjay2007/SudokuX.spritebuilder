@@ -18,6 +18,7 @@ const int MAX_LENGTH = 32;
 }
 @property (nonatomic, assign) NSInteger     length;
 @property (nonatomic, assign) NSInteger     countSet;
+@property (nonatomic, assign) NSUInteger    bits;
 
 @end
 
@@ -88,5 +89,11 @@ const int MAX_LENGTH = 32;
     }
     [ret appendFormat:@", %@", numStr];
     return ret;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    FastBitArray *copy = [[FastBitArray alloc] initWithLength:self.length defaultValue:NO];
+    copy.bits = _bits;
+    return copy;
 }
 @end

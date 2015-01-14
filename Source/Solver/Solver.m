@@ -76,7 +76,7 @@ static NSArray *FillCellsWithSolePossibleNumber(PuzzleState *state, NSArray *tec
     
     BOOL isAddedTechnique = NO;
     if ([options.eliminationTechniques count] == 0) {
-        options.eliminationTechniques = @[[[NakedSingleTechnique alloc] init]];
+        options.eliminationTechniques = @[[NakedSingleTechnique technique]];
         isAddedTechnique = YES;
     }
     
@@ -208,7 +208,8 @@ static SolverResults *BruteForceSolve(PuzzleState *state, SolverOptions *options
                 }
                 
                 // If you are not cloning, you need to cancel out the change
-                [newState setCellValue:nil atX:(int)(bestGuessCell.x) y:(int)(bestGuessCell.y)];
+                [newState setCellValue:nil atPoint:bestGuessCell];
+//                [newState setCellValue:nil atX:(int)(bestGuessCell.x) y:(int)(bestGuessCell.y)];
             }
         }
     }

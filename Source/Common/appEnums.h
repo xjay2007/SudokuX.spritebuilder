@@ -27,12 +27,14 @@ typedef enum : NSUInteger {
     ControlButtonFunctionUnvalid = -1,
     ControlButtonFunctionDigitIndexMax = 9,
     // image
-    ControlButtonFunctionPen,
-    ControlButtonFunctionNote,
-    ControlButtonFunctionEraser,
-    ControlButtonFunctionUndo,
-    ControlButtonFunctionExit,
-    ControlButtonFunctionHelp,
+    ControlButtonFunctionPen = 10,
+    ControlButtonFunctionNote = 11,
+    ControlButtonFunctionEraser = 12,
+    ControlButtonFunctionUndo = 13,
+    ControlButtonFunctionExit = 14,
+    ControlButtonFunctionHelp = 15,
+    ControlButtonFunctionSolve = 16,
+    ControlButtonFunctionNew = 17,
     // max
     ControlButtonFunctionMax,
 } ControlButtonFunction;

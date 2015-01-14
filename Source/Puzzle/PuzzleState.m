@@ -185,7 +185,7 @@ static NSMutableArray *InstantiatePossibleNumbersArray(PuzzleState *state);
             NSInteger numberOfChanges = 0;
             BOOL isExitedEarly = NO;
             isNotDone |= [e execute:self isExitEarlyWhenSoleFound:isEarlyExitWhenSoleFound possibleNumbers:possibleNumbers numberOfChanges:&numberOfChanges isExitedEarly:&isExitedEarly];
-            if (*usesOfTechnique != nil) {
+            if (usesOfTechnique != nil && *usesOfTechnique != nil) {
                 NSNumber *uses = (*usesOfTechnique)[e];
                 (*usesOfTechnique)[e] = (uses != nil) ? @(numberOfChanges + [uses integerValue]) : @(numberOfChanges);
             }

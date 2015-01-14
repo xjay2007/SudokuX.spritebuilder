@@ -10,7 +10,7 @@
 
 // A simple bit bucket class
 // Maximum length of the array == sizeof(Int32)*8
-@interface FastBitArray : NSObject
+@interface FastBitArray : NSObject <NSCopying>
 
 + (instancetype)arrayWithLength:(NSInteger)length;
 + (instancetype)arrayWithLength:(NSInteger)length defaultValue:(BOOL)defaultValue;

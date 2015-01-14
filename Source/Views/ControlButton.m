@@ -11,9 +11,9 @@
 @implementation ControlButton
 
 - (void)didLoadFromCCB {
-    _functionType = ControlButtonFunctionUnvalid;
-    _image.visible = NO;
-    _label.visible = NO;
+//    _functionType = ControlButtonFunctionUnvalid;
+//    _image.visible = NO;
+//    _label.visible = NO;
 }
 
 - (void)onEnter {
@@ -31,12 +31,17 @@
 }
 
 - (void)updateFunctionDisplay {
+    if (self.functionType == ControlButtonFunctionSolve ||
+        self.functionType == ControlButtonFunctionNew) {
+        return;
+    }
     _image.visible = self.functionType != ControlButtonFunctionUnvalid && self.functionType > ControlButtonFunctionDigitIndexMax;
     _label.visible = self.functionType != ControlButtonFunctionUnvalid && self.functionType < ControlButtonFunctionDigitIndexMax;
     [_label setString:[NSString stringWithFormat:@"%lu", self.functionType + 1]];
     NSString *imageName = [self imageNameWithFunctionType:self.functionType];
     if (imageName) {
-        _image.normalMapSpriteFrame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:imageName];
+        CCSpriteFrame *sprFrm = [[CCSprite spriteWithImageNamed:imageName] spriteFrame];
+        _image.spriteFrame = sprFrm;
     }
 }
 
@@ -51,7 +56,15 @@
         case ControlButtonFunctionPen:
             return @"Images/Pen.png";
             break;
-            
+        case ControlButtonFunctionNote:
+            return @"Images/Scratchpad.png";
+            break;
+        case ControlButtonFunctionEraser:
+            return @"Images/Eraser.png";
+            break;
+        case ControlButtonFunctionUndo:
+            return @"Images/Undo.png";
+            break;
         default:
             break;
     }

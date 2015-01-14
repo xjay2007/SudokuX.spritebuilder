@@ -21,4 +21,6 @@
 #define COUNTER_END()           do{}while(0);
 #endif //
 
+#define GAME_SELECTED_CELL_INVALID  CGPointMake(-1,-1)
+
 #endif
